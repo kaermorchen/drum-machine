@@ -3,22 +3,32 @@ import Channel from '../models/channel';
 import ChannelView from './channel-view';
 import Song from '../models/song';
 import { makeAutoObservable } from 'mobx';
+import Step from '../models/step';
+
+function createEmptySteps(length = 16) {
+  return Array.from({ length }, () => new Step());
+}
 
 const songs = [
-  new Song({ name: 'aabenhihat' }),
-  new Song({ name: 'gulvtam' }),
-  new Song({ name: 'hihat' }),
   new Song({ name: 'hihatfod' }),
-  new Song({ name: 'kantslag' }),
-  new Song({ name: 'lilletromme' }),
-  new Song({ name: 'ride' }),
-  new Song({ name: 'sidetamdyb' }),
   new Song({ name: 'sidetamlys' }),
+  new Song({ name: 'gulvtam' }),
+  new Song({ name: 'ride' }),
+  new Song({ name: 'hihat' }),
+  new Song({ name: 'lilletromme' }),
   new Song({ name: 'stortromme' }),
 ];
 
 class DrumMachineState {
-  channels = [new Channel({ song: songs[0] })];
+  channels = [
+    new Channel({ song: songs[0], steps: createEmptySteps() }),
+    new Channel({ song: songs[1], steps: createEmptySteps() }),
+    new Channel({ song: songs[2], steps: createEmptySteps() }),
+    new Channel({ song: songs[3], steps: createEmptySteps() }),
+    new Channel({ song: songs[4], steps: createEmptySteps() }),
+    new Channel({ song: songs[5], steps: createEmptySteps() }),
+    new Channel({ song: songs[6], steps: createEmptySteps() }),
+  ];
 
   constructor() {
     makeAutoObservable(this);
@@ -27,7 +37,9 @@ class DrumMachineState {
   }
 
   addChannel() {
-    this.channels.push(new Channel({ song: songs[0] }));
+    this.channels.push(
+      new Channel({ song: songs[0], steps: createEmptySteps() })
+    );
   }
 }
 
