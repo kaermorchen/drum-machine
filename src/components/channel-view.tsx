@@ -11,7 +11,9 @@ interface ChannelViewProps {
 const ChannelView = observer(({ channel, drumMachine }: ChannelViewProps) => {
   return (
     <div className="flex mb-2 items-center">
-      <div className="w-48 cursor-pointer">{channel.song.name}</div>
+      <div className="w-48 cursor-pointer" onClick={channel.song.play}>
+        {channel.song.name}
+      </div>
       <div className="flex">
         {channel.steps.map((step, index) => (
           <StepView
