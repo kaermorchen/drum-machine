@@ -5,7 +5,11 @@ interface ChannelViewProps {
 }
 
 function ChannelView({ channel }: ChannelViewProps) {
-  return <div className="mb-2">{channel.song.name}</div>;
+  return (
+    <div className="mb-2" onClick={channel.song.play}>
+      {channel.song.name}
+    </div>
+  );
 }
 
 export default ChannelView;

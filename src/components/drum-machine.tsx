@@ -4,7 +4,18 @@ import ChannelView from './channel-view';
 import Song from '../models/song';
 import { makeAutoObservable } from 'mobx';
 
-const songs = [new Song({ name: 'hello' })];
+const songs = [
+  new Song({ name: 'aabenhihat' }),
+  new Song({ name: 'gulvtam' }),
+  new Song({ name: 'hihat' }),
+  new Song({ name: 'hihatfod' }),
+  new Song({ name: 'kantslag' }),
+  new Song({ name: 'lilletromme' }),
+  new Song({ name: 'ride' }),
+  new Song({ name: 'sidetamdyb' }),
+  new Song({ name: 'sidetamlys' }),
+  new Song({ name: 'stortromme' }),
+];
 
 class DrumMachineState {
   channels = [new Channel({ song: songs[0] })];
