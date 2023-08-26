@@ -10,13 +10,13 @@ function createEmptySteps(length = 16) {
 }
 
 const songs = [
-  new Song({ name: 'hihatfod' }),
-  new Song({ name: 'sidetamlys' }),
-  new Song({ name: 'gulvtam' }),
-  new Song({ name: 'ride' }),
-  new Song({ name: 'hihat' }),
-  new Song({ name: 'lilletromme' }),
-  new Song({ name: 'stortromme' }),
+  new Song({ name: 'Hi-hat (foot)', fileName: 'hihatfod' }),
+  new Song({ name: 'Tom-tom', fileName: 'sidetamlys' }),
+  new Song({ name: 'Floor tom', fileName: 'gulvtam' }),
+  new Song({ name: 'Ride cymbal', fileName: 'ride' }),
+  new Song({ name: 'Hi-hat', fileName: 'hihat' }),
+  new Song({ name: 'Snare drum', fileName: 'lilletromme' }),
+  new Song({ name: 'Bass drum', fileName: 'stortromme' }),
 ];
 
 export class DrumMachineState {
