@@ -16,7 +16,7 @@ export default class Song {
   }
 
   get url() {
-    return `/songs/${this.fileName}.mp3`;
+    return `/drum-machine/songs/${this.fileName}.mp3`;
   }
 
   play() {
