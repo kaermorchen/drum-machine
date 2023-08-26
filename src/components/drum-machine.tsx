@@ -19,7 +19,7 @@ const songs = [
   new Song({ name: 'stortromme' }),
 ];
 
-class DrumMachineState {
+export class DrumMachineState {
   channels = [
     new Channel({ song: songs[0], steps: createEmptySteps() }),
     new Channel({ song: songs[1], steps: createEmptySteps() }),
@@ -89,9 +89,50 @@ class DrumMachineState {
       ],
     }),
   ];
+  isPlaying = false;
+  tempo = 100;
+  maxSteps = 16;
+  currentStep = 0;
+  intervalId: undefined | number;
 
   constructor() {
     makeAutoObservable(this);
+
+    this.toggle = this.toggle.bind(this);
+    this.tick = this.tick.bind(this);
+  }
+
+  toggle() {
+    if (this.isPlaying) {
+      clearInterval(this.intervalId);
+      this.intervalId = undefined;
+      this.isPlaying = false;
+    } else {
+      this.currentStep = 0;
+      this.intervalId = setInterval(this.tick, this.tickInterval());
+      this.isPlaying = true;
+    }
+  }
+
+  tickInterval() {
+    const beatsPerSecond = this.tempo / 60;
+    const sixteenthsPerSecond = beatsPerSecond * 4;
+    const tickInterval = 1000 / sixteenthsPerSecond;
+
+    return tickInterval;
+  }
+
+  tick() {
+    for (const channel of this.channels) {
+      if (channel.steps[this.currentStep].isPlaying) {
+        channel.song.play();
+      }
+    }
+
+    this.currentStep += 1;
+    if (this.currentStep >= this.maxSteps) {
+      this.currentStep = 0;
+    }
   }
 }
 
@@ -99,11 +140,21 @@ const state = new DrumMachineState();
 
 const DrumMachine = observer(() => {
   return (
-    <div className="mb-4">
-      {state.channels.map((channel, index) => (
-        <ChannelView channel={channel} key={index} />
-      ))}
-    </div>
+    <>
+      <div className="mb-4">
+        <button
+          onClick={state.toggle}
+          className="pointer-events-auto rounded-md border px-3 py-2 leading-5"
+        >
+          {state.isPlaying ? '⏸️' : '▶️'}
+        </button>
+      </div>
+      <div>
+        {state.channels.map((channel, index) => (
+          <ChannelView channel={channel} drumMachine={state} key={index} />
+        ))}
+      </div>
+    </>
   );
 });
 
