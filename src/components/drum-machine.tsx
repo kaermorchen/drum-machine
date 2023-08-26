@@ -25,21 +25,73 @@ class DrumMachineState {
     new Channel({ song: songs[1], steps: createEmptySteps() }),
     new Channel({ song: songs[2], steps: createEmptySteps() }),
     new Channel({ song: songs[3], steps: createEmptySteps() }),
-    new Channel({ song: songs[4], steps: createEmptySteps() }),
-    new Channel({ song: songs[5], steps: createEmptySteps() }),
-    new Channel({ song: songs[6], steps: createEmptySteps() }),
+    new Channel({
+      song: songs[4],
+      steps: [
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(true),
+        new Step(),
+      ],
+    }),
+    new Channel({
+      song: songs[5],
+      steps: [
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(),
+        new Step(),
+      ],
+    }),
+    new Channel({
+      song: songs[6],
+      steps: [
+        new Step(true),
+        new Step(true),
+        new Step(true),
+        new Step(),
+        new Step(),
+        new Step(),
+        new Step(true),
+        new Step(true),
+        new Step(true),
+        new Step(),
+        new Step(),
+        new Step(true),
+        new Step(),
+        new Step(),
+        new Step(true),
+        new Step(true),
+      ],
+    }),
   ];
 
   constructor() {
     makeAutoObservable(this);
-
-    this.addChannel = this.addChannel.bind(this);
-  }
-
-  addChannel() {
-    this.channels.push(
-      new Channel({ song: songs[0], steps: createEmptySteps() })
-    );
   }
 }
 
@@ -47,20 +99,11 @@ const state = new DrumMachineState();
 
 const DrumMachine = observer(() => {
   return (
-    <>
-      <div className="mb-4">
-        {state.channels.map((channel, index) => (
-          <ChannelView channel={channel} key={index} />
-        ))}
-      </div>
-
-      <button
-        onClick={state.addChannel}
-        className="pointer-events-auto rounded-md border px-3 py-2 leading-5"
-      >
-        Add channel
-      </button>
-    </>
+    <div className="mb-4">
+      {state.channels.map((channel, index) => (
+        <ChannelView channel={channel} key={index} />
+      ))}
+    </div>
   );
 });
 

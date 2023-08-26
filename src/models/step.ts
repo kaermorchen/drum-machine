@@ -1,10 +1,12 @@
 import { makeAutoObservable } from 'mobx';
 
 export default class Step {
-  isPlaying = false;
+  isPlaying: boolean;
 
-  constructor() {
+  constructor(isPlaying = false) {
     makeAutoObservable(this);
+
+    this.isPlaying = isPlaying;
 
     this.toggle = this.toggle.bind(this);
   }
